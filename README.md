@@ -75,7 +75,7 @@ cv::inRange(hsv_image, lower_bound, upper_bound, mask);
 **Camera not found:**
 ```bash
 ls /dev/video*  # Check available cameras
-ros2 run usb_cam usb_cam_node_exe --ros-args -p video_device:=/dev/video1
+ros2 run usb_cam usb_cam_node_exe --ros-args -p video_device:=/dev/video2
 ```
 
 **GUI not showing:**
