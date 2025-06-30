@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindowDesign</class>
+ <widget class="QMainWindow" name="MainWindowDesign">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>2000</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QRosApp</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/images.qrc">
+    <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
+  </property>
+  <property name="locale">
+   <locale language="English" country="Australia"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="original_image">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="hsv_color">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>500</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="masked_white">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>10</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="masked_raw">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>500</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="H_min">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>80</y>
+      <width>360</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>179</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="H_min_box">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>130</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>179</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="H_max_box">
+    <property name="geometry">
+     <rect>
+      <x>1600</x>
+      <y>130</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>179</number>
+    </property>
+   </widget>
+   <widget class="QSlider" name="H_max">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>180</y>
+      <width>360</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>179</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="S_min_box">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>320</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+   </widget>
+   <widget class="QSlider" name="S_min">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>270</y>
+      <width>360</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="S_max">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>370</y>
+      <width>360</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="S_max_box">
+    <property name="geometry">
+     <rect>
+      <x>1600</x>
+      <y>320</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="H">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>40</y>
+      <width>321</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hue</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="S">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>240</y>
+      <width>321</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Saturation</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="V_min_box">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>510</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="V_max_box">
+    <property name="geometry">
+     <rect>
+      <x>1600</x>
+      <y>510</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="V">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>430</y>
+      <width>321</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Value</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="V_max">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>560</y>
+      <width>360</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="V_min">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>460</y>
+      <width>360</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Upper">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>750</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Upper</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Lower">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>700</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Lower</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Result">
+    <property name="geometry">
+     <rect>
+      <x>1340</x>
+      <y>625</y>
+      <width>101</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Result</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="H_result_upper">
+    <property name="geometry">
+     <rect>
+      <x>1430</x>
+      <y>750</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="H_result_lower">
+    <property name="geometry">
+     <rect>
+      <x>1430</x>
+      <y>700</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="S_result_upper">
+    <property name="geometry">
+     <rect>
+      <x>1530</x>
+      <y>750</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="S_result_lower">
+    <property name="geometry">
+     <rect>
+      <x>1530</x>
+      <y>700</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="V_result_lower">
+    <property name="geometry">
+     <rect>
+      <x>1630</x>
+      <y>700</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="V_result_upper">
+    <property name="geometry">
+     <rect>
+      <x>1630</x>
+      <y>750</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+  </widget>
+  <action name="action_Quit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
+   </property>
+  </action>
+  <action name="action_Preferences">
+   <property name="text">
+    <string>&amp;Preferences</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About &amp;Qt</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../resources/images.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>action_Quit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindowDesign</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
