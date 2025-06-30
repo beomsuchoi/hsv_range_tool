@@ -19,10 +19,6 @@ sudo apt install ros-humble-usb-cam ros-humble-cv-bridge
 sudo apt install qtbase5-dev libopencv-dev
 ```
 
-![Uploading Screenshot from 2025-06-30 15-02-09.png…]()
-![Uploading Screenshot from 2025-06-30 14-56-16.png…]()
-
-
 ### Build Instructions
 ```bash
 # Navigate to workspace
