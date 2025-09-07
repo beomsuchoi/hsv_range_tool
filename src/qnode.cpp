@@ -21,7 +21,7 @@ QNode::QNode()
   node = rclcpp::Node::make_shared("hsv_range_tool");
   
   image_subscriber_ = node->create_subscription<sensor_msgs::msg::Image>(
-    "/image_raw", 
+    "/path_rs/path_rs/color/image_raw", 
     10, 
     std::bind(&QNode::imageCallback, this, std::placeholders::_1)
   );

@@ -129,8 +129,11 @@ void MainWindow::updateHSVImages()
 {
   if (current_image_.empty()) return;
   
-  // Convert to HSV
+  // Convert to HSV (PathFind와 동일)
   cv::cvtColor(current_image_, hsv_image_, cv::COLOR_BGR2HSV);
+  
+  // Apply median blur (PathFind의 enhancedHSVFilter와 동일)
+  cv::medianBlur(hsv_image_, hsv_image_, 5);
   
   // Get HSV ranges from sliders
   int h_min = ui->H_min->value();
@@ -140,21 +143,15 @@ void MainWindow::updateHSVImages()
   int v_min = ui->V_min->value();
   int v_max = ui->V_max->value();
   
-  // Create HSV color spectrum image (HSV 범위의 스펙트럼 표시)
+  // Create HSV color spectrum image (기존 유지)
   cv::Mat hsv_spectrum = cv::Mat::zeros(current_image_.size(), CV_8UC3);
   
-  // 가로로 H 스펙트럼, 세로로 S/V 변화 표현
   for (int y = 0; y < hsv_spectrum.rows; y++)
   {
     for (int x = 0; x < hsv_spectrum.cols; x++)
     {
-      // H: 가로 방향으로 h_min ~ h_max 범위
       int h_val = h_min + (h_max - h_min) * x / hsv_spectrum.cols;
-      
-      // S: 세로 상단부터 s_max, 하단으로 갈수록 s_min
       int s_val = s_max - (s_max - s_min) * y / hsv_spectrum.rows;
-      
-      // V: 고정값 (중간값 사용)
       int v_val = (v_min + v_max) / 2;
       
       hsv_spectrum.at<cv::Vec3b>(y, x) = cv::Vec3b(h_val, s_val, v_val);
@@ -165,15 +162,39 @@ void MainWindow::updateHSVImages()
   cv::cvtColor(hsv_spectrum, hsv_color_display, cv::COLOR_HSV2BGR);
   displayImage(ui->hsv_color, hsv_color_display);
   
-  // Create mask (HSV 범위에 맞는 부분 찾기)
-  cv::Scalar lower_bound(h_min, s_min, v_min);
-  cv::Scalar upper_bound(h_max, s_max, v_max);
-  cv::inRange(hsv_image_, lower_bound, upper_bound, mask_image_);
+  // Enhanced HSV filtering (PathFind의 enhancedHSVFilter 로직 적용)
+  if (h_min > h_max) {
+    // 색상이 180도를 넘어가는 경우 (예: 빨간색)
+    cv::Mat mask1, mask2;
+    
+    // 첫 번째 범위
+    cv::Scalar lower_bound1(h_min, s_min, v_min);
+    cv::Scalar upper_bound1(179, s_max, v_max);
+    cv::inRange(hsv_image_, lower_bound1, upper_bound1, mask1);
+    
+    // 두 번째 범위
+    cv::Scalar lower_bound2(0, s_min, v_min);
+    cv::Scalar upper_bound2(h_max, s_max, v_max);
+    cv::inRange(hsv_image_, lower_bound2, upper_bound2, mask2);
+    
+    // 두 마스크 합치기
+    mask_image_ = mask1 + mask2;
+  } else {
+    // 일반 색상 영역
+    cv::Scalar lower_bound(h_min, s_min, v_min);
+    cv::Scalar upper_bound(h_max, s_max, v_max);
+    cv::inRange(hsv_image_, lower_bound, upper_bound, mask_image_);
+  }
   
-  // Display white mask (이진 마스크: 맞는 부분=흰색, 나머지=검정색)
+  // Apply morphological operations (PathFind와 동일)
+  static cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(7, 7), cv::Point(-1, -1));
+  cv::morphologyEx(mask_image_, mask_image_, cv::MORPH_OPEN, element);
+  cv::morphologyEx(mask_image_, mask_image_, cv::MORPH_CLOSE, element);
+  
+  // Display white mask
   displayImage(ui->masked_white, mask_image_);
   
-  // Apply mask to original image (수정된 버전)
+  // Apply mask to original image
   masked_image_ = cv::Mat::zeros(current_image_.size(), current_image_.type());
   current_image_.copyTo(masked_image_, mask_image_);
   displayImage(ui->masked_raw, masked_image_);
